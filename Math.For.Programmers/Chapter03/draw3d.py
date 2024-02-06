@@ -3,6 +3,7 @@ import matplotlib
 import os
 from matplotlib.patches import Polygon, FancyArrowPatch
 from matplotlib.collections import PatchCollection
+import numpy as np
 import matplotlib.pyplot as plt
 from mpl_toolkits.mplot3d import Axes3D, proj3d
 from mpl_toolkits.mplot3d.art3d import Poly3DCollection
@@ -14,11 +15,17 @@ class FancyArrow3D(FancyArrowPatch):
         FancyArrowPatch.__init__(self, (0,0), (0,0), *args, **kwargs)
         self._verts3d = xs, ys, zs
 
-    def draw(self, renderer):
+    def do_3d_projection(self, renderer=None):
         xs3d, ys3d, zs3d = self._verts3d
-        xs, ys, zs = proj3d.proj_transform(xs3d, ys3d, zs3d, renderer.M)
-        self.set_positions((xs[0],ys[0]),(xs[1],ys[1]))
-        FancyArrowPatch.draw(self, renderer)
+        xs, ys, zs = proj3d.proj_transform(xs3d, ys3d, zs3d, self.axes.M)
+        self.set_positions((xs[0], ys[0]), (xs[1], ys[1]))
+        return np.min(zs)
+
+#    def draw(self, renderer):
+#        xs3d, ys3d, zs3d = self._verts3d
+#        xs, ys, zs = proj3d.proj_transform(xs3d, ys3d, zs3d, renderer.M)
+#        self.set_positions((xs[0],ys[0]),(xs[1],ys[1]))
+#        FancyArrowPatch.draw(self, renderer)
 
 
 class Polygon3D():
