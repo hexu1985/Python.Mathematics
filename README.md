@@ -6,4 +6,5 @@
 - [用Python编程和实践!数学教科书](Python.Math.Textbook)
 - [Numpy数据处理详解](Numpy.Data.Processing.Detailed.Explanation)
 - [程序员的数学基础 python实战](Math.Fundamentals.For.Programmers.Using.Python)
+- [Python数据分析基础教程：NumPy学习指南 第2版](Numpy.Beginners.Guide)
 
